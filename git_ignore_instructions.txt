@@ -1,0 +1,1 @@
+Be very careful of adding things to .gitignore. you must any files containing sensitive information or they will be leaked on the internet.
