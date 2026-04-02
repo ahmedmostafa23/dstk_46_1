@@ -1,0 +1,14 @@
+database:
+  db_name: postgres
+  db_port: 5432
+  db_user: admin
+  db_password: secret
+  db_departments:
+    - Finance
+    - HR
+
+settings:
+  debug: true
+  timeout:
+    unit: seconds
+    number: 30

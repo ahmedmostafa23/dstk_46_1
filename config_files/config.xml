@@ -1,0 +1,15 @@
+<config>
+    <database>
+        <db_name>postgres</db_name>
+        <db_port>5432</db_port>
+        <db_user>admin</db_user>
+        <db_password>secret</db_password>
+    </database>
+    <settings>
+        <debug>true</debug>
+        <timeout>
+            <unit>seconds</unit>
+            <number>30</number>
+        </timeout>
+    </settings>
+</config>

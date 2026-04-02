@@ -1,0 +1,54 @@
+# ============================================================
+#  ML Pipeline Configuration
+# ============================================================
+
+# --- Data Loading -------------------------------------------
+data:
+  path: "attrition_data.csv"
+  loader: "csv"                  # csv | json | excel | parquet
+  args:                          # keyword args forwarded to the loader function
+    delimiter: ","
+    # encoding: "utf-8"          # any pandas read_* kwarg works here
+
+# --- Feature / Target Selection -----------------------------
+features:
+  target: "attrition"
+  numerical:
+    - age
+    - dailyrate
+    - distancefromhome
+  categorical:
+    - businesstravel
+    - department
+    - educationfield
+
+# --- Preprocessing ------------------------------------------
+preprocessing:
+  scaler:
+    type: "standard"             # standard | minmax | robust | maxabs
+    args: {}                     # e.g. { with_mean: true } for StandardScaler
+    # args: { feature_range: [0, 1] }  # for MinMaxScaler
+
+  encoder:
+    type: "onehot"               # onehot | ordinal | target
+    args:                        # kwargs forwarded to the encoder
+      drop: "first"              # drop first dummy to avoid multicollinearity
+      sparse_output: false
+      handle_unknown: "ignore"
+
+# --- Model --------------------------------------------------
+model:
+  type: "logistic_regression"    # logistic_regression | random_forest | svm | knn | decision_tree
+  args:
+    C: 1.0
+    max_iter: 1000
+    # fit_intercept: true        # ← this is sklearn's equivalent of "include_bias"
+
+# --- Evaluation (optional) ----------------------------------
+evaluation:
+  test_size: 0.2
+  random_state: 42
+  metrics:
+    - accuracy
+    - f1
+    - roc_auc
