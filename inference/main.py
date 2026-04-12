@@ -17,6 +17,15 @@ from data_models.model_inference_response_schema import ModelInferenceResponseSc
 
 app = FastAPI()
 
+from fastapi.middleware.cors import CORSMiddleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # "*" allows all origins (IPs) (not recommended for production)
+    allow_credentials=True,
+    allow_methods=["*"], # Allow all HTTP methods (GET, POST, PUT, DELETE, etc.)
+    allow_headers=["*"], # Allow all headers
+)
+
 def get_api_key():
     return os.environ["API_KEY"] 
 
@@ -36,6 +45,12 @@ model = load_model()
 def get_model():
     return model
 
+
+@app.get("/health")
+async def health_handler():
+    return APIResponse(
+            detail="healthy",
+    )
 
 @app.post("/model/inference", status_code=status.HTTP_200_OK, response_model=APIResponse[ModelInferenceResponseSchema])
 async def model_inference_handler(employee_data: EmployeeData, request: Request, model = Depends(get_model), authentication = Security(authenticate)):
