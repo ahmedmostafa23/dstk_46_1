@@ -1,0 +1,7 @@
+catboost
+numpy
+pandas
+google-cloud-storage
+fastapi
+uvicorn
+python-dotenv

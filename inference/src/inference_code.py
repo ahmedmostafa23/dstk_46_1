@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 
 def load_model():
-    with open("models_best_recall_catboost.pkl", "rb") as f:
+    with open("models/model.pkl", "rb") as f:
         model = pickle.load(f)
     return model
 
